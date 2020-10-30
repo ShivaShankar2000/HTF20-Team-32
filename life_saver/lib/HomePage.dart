@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 class HomePage extends StatefulWidget{
-  HomePage({Key key,this.user}) : super(key: key);
+  HomePage({Key key,this.user,  this.emergency}) : super(key: key);
   final String user;
+  final String emergency;
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(18.0),
                       ),
                       onPressed: () {
-
+                        launch("tel:102");
                       },
                       color: Colors.grey.shade200,
                       child: Column(
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           SvgPicture.asset(
                             "assets/sign.svg", width: width / 3.5,),
-                          Text("First Aid", style: TextStyle(fontSize: 15))
+                          Text("Med. Emergency", style: TextStyle(fontSize: 15))
                         ],
                       )
                   ),
@@ -125,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(18.0),
                     ),
                     onPressed: () {
-                      launch("tel:102");
+                      launch("tel:1073");
                     },
                     color: Colors.grey.shade200,
                     child: Column(
@@ -169,15 +170,20 @@ class _HomePageState extends State<HomePage> {
             child: Text("Alert your Emergency Contact",
                 style: TextStyle(fontSize: 15, color: Colors.grey)),
           ),
-          CircleAvatar(
-              radius: 35,
-              backgroundColor:
-              Colors.red[800],
-              child: CircleAvatar(
-                child: Icon(Icons.alarm, color: Colors.white, size: 30,),
-                radius: 29,
-                backgroundColor: Colors.red.shade300,
-              ))
+          GestureDetector(
+            onTap: (){
+              launch("tel:${widget.emergency}");
+            },
+            child: CircleAvatar(
+                radius: 35,
+                backgroundColor:
+                Colors.red[800],
+                child: CircleAvatar(
+                  child: Icon(Icons.phone, color: Colors.white, size: 30,),
+                  radius: 29,
+                  backgroundColor: Colors.red.shade300,
+                )),
+          )
         ],
       ),
     );

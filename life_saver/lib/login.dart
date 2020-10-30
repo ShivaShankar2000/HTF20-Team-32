@@ -9,6 +9,7 @@ class Login extends StatefulWidget {
 class _State extends State<Login> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController EController = TextEditingController();
   bool flag  = false;
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,20 @@ class _State extends State<Login> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Phone Number',
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top:8.0,bottom: 8),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: TextField(
+                        controller: EController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Emergency Number',
                         ),
                       ),
                     ),
@@ -116,7 +131,7 @@ class _State extends State<Login> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          MainPage(user: nameController.text)));
+                                          MainPage(user: nameController.text,emergency:EController.text)));
                             },
                           )),
                     ),

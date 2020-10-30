@@ -5,8 +5,9 @@ import 'package:life_saver/HomePage.dart';
 import 'package:life_saver/maps.dart';
 
 class MainPage extends StatefulWidget {
-  MainPage({Key key,this.user}) : super(key: key);
+  MainPage({Key key,this.user,this.emergency}) : super(key: key);
   final String user;
+  final String emergency;
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -28,7 +29,7 @@ class _MainPageState extends State<MainPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       body: (_currentIndex == 0
-          ? HomePage(user: widget.user,)
+          ? HomePage(user: widget.user,emergency:widget.emergency)
           : MapsPage()),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
