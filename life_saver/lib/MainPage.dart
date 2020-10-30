@@ -1,35 +1,74 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
 }
 class _MainPageState extends State<MainPage>{
+  int _currentIndex=0;
+  void onTabTapped(index) {
+    setState(() {
+      _currentIndex = index;
+    });
+    if (_currentIndex == 0) {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => MainPage(
+              )));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     double height  = MediaQuery.of(context).size.height;
     double width  = MediaQuery.of(context).size.width;
-    List<Color> _colors = [Colors.deepPurpleAccent, Colors.yellow];
-    List<double> _stops = [0.3, 0.9];
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        onTap: onTabTapped,
+        elevation: 30,
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/homenav.svg'),
+              activeIcon: SvgPicture.asset('assets/homenav2.svg'),
+              label: "home"),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/statnav2.svg'),
+              activeIcon: SvgPicture.asset('assets/statsnav.svg'),
+              label: "Stats"),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/profilenav2.svg'),
+              activeIcon: SvgPicture.asset('assets/profilenav.svg'),
+              label: "profile"),
+        ],
+      ),
       body: Column(
         children: [
           Container(
             width: width,
             height: height/3.5,
             decoration: BoxDecoration(
-                color: Colors.blue
-            ),
+              gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Colors.indigo,
+                    Colors.teal
+                  ]),
+      ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding:  EdgeInsets.only(top:100.0),
-                  child: Text("",style: TextStyle(fontSize: 25,color: Colors.white),),
+                  padding:  EdgeInsets.only(top:120.0),
+                  child: Text("",style: TextStyle(fontSize: 22,color: Colors.white),),
                 ),
                 Padding(
-                  padding:  EdgeInsets.all(25.0),
+                  padding:  EdgeInsets.all(15.0),
                   child: Text("",style: TextStyle(fontSize: 20,color: Colors.white)),
                 ),
 
