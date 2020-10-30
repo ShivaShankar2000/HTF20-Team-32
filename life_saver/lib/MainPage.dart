@@ -93,8 +93,13 @@ class _MainPageState extends State<MainPage>{
                     ),
                     onPressed: () {},
                     color: Colors.grey.shade200,
-                    child: Text("Health".toUpperCase(),
-                        style: TextStyle(fontSize: 14)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SvgPicture.asset("assets/sign.svg",width: width/3.5,),
+                        Text("First Aid",style: TextStyle(fontSize: 15))
+                      ],
+                    )
                   ),
 
                 ),
@@ -107,8 +112,14 @@ class _MainPageState extends State<MainPage>{
                     ),
                     onPressed: () {},
                     color: Colors.grey.shade200,
-                    child: Text("Fire".toUpperCase(),
-                        style: TextStyle(fontSize: 14)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SvgPicture.asset("assets/firefighter.svg",width: width/3.5,),
+                        Text("Fire Emergency",
+                            style: TextStyle(fontSize: 14)),
+                      ],
+                    ),
                   ),
 
                 )
@@ -129,11 +140,16 @@ class _MainPageState extends State<MainPage>{
                     ),
                     onPressed: () {},
                     color: Colors.grey.shade200,
-                    child: Text("Accident".toUpperCase(),
-                        style: TextStyle(fontSize: 14)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SvgPicture.asset("assets/accident.svg",width: width/3.5,),
+                        Text("Accident",
+                            style: TextStyle(fontSize: 14)),
+                      ],
+                    ),
                   ),
-
-                ),
+                  ),
                 Container(
                   width: width/2.5,
                   height: height/5,
@@ -143,11 +159,16 @@ class _MainPageState extends State<MainPage>{
                     ),
                     onPressed: () {},
                     color: Colors.grey.shade200,
-                    child: Text("Police".toUpperCase(),
-                        style: TextStyle(fontSize: 14)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SvgPicture.asset("assets/policeman.svg",width: width/3.5,),
+                        Text("Police",
+                            style: TextStyle(fontSize: 14)),
+                      ],
+                    ),
                   ),
-
-                )
+                  ),
               ],
             ),
           ),

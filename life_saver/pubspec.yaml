@@ -52,6 +52,8 @@ flutter:
     - assets/accident.svg
     - assets/firefighter.svg
     - assets/heartbeat.svg
+    - assets/sign.svg
+    - assets/policeman.svg
     - assets/homenav.svg
     - assets/homenav2.svg
     - assets/profilenav.svg
