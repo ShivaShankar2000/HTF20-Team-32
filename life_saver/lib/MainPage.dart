@@ -38,12 +38,10 @@ class _MainPageState extends State<MainPage>{
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/homenav.svg'),
-              activeIcon: SvgPicture.asset('assets/homenav2.svg'),
+              icon: Icon(Icons.home,size: 32),
               label: "home"),
           BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/statnav2.svg'),
-              activeIcon: SvgPicture.asset('assets/statsnav.svg'),
+              icon:Icon( Icons.map,size : 32),
               label: "Stats"),
         ],
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 class HomePage extends StatefulWidget{
   HomePage({Key key,this.user}) : super(key: key);
   final String user;
@@ -70,7 +71,9 @@ class _HomePageState extends State<HomePage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+
+                      },
                       color: Colors.grey.shade200,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -90,7 +93,9 @@ class _HomePageState extends State<HomePage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      launch("tel:101");
+                    },
                     color: Colors.grey.shade200,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -119,7 +124,9 @@ class _HomePageState extends State<HomePage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      launch("tel:102");
+                    },
                     color: Colors.grey.shade200,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -139,7 +146,9 @@ class _HomePageState extends State<HomePage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      launch("tel:100");
+                    },
                     color: Colors.grey.shade200,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
