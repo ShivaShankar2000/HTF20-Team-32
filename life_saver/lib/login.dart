@@ -1,100 +1,128 @@
 import 'package:flutter/material.dart';
+import 'package:life_saver/MainPage.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: MyApp(),
-  ));
-}
-
-class MyApp extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
   _State createState() => _State();
 }
 
-class _State extends State<MyApp> {
+class _State extends State<Login> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  bool flag  = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-            padding: EdgeInsets.all(10),
-            child: ListView(
-              children: <Widget>[
-                Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      'Life Saver',
-                      style: TextStyle(
+        body: SingleChildScrollView(
+          child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top:20.0, bottom: 100),
+                    child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'Life Saver',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 30),
+                        )),
+                  ),
+
+
+                  Padding(
+                    padding: const EdgeInsets.only(top:8.0,bottom: 8),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: TextField(
+                        controller: nameController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Name',
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top:8.0,bottom: 8),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Phone Number',
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top:30.0,bottom: 20),
+                    child: Container(
+                        height: 50,
+                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: RaisedButton(
+                          textColor: Colors.white,
                           color: Colors.blue,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 30),
-                    )),
-
-
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Name',
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Phone Number',
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  child: TextField(
-                    obscureText: true,
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'OTP',
-                    ),
-                  ),
-                ),
-                Container(
-                    height: 50,
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: RaisedButton(
-                      textColor: Colors.white,
-                      color: Colors.blue,
-                      child: Text('Login'),
-                      onPressed: () {
-                        print(nameController.text);
-                        print(passwordController.text);
-                      },
-                    )),
-                Container(
-                    child: Row(
-                      children: <Widget>[
-                        Text('Does not have account?'),
-                        FlatButton(
-                          textColor: Colors.blue,
-                          child: Text(
-                            'Sign Up',
-                            style: TextStyle(fontSize: 20),
-                          ),
+                          child: Text('Get OTP'),
                           onPressed: () {
-                            //signup screen
+                            setState(() {
+                              flag = true;
+                            });
                           },
-                        )
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ))
-              ],
-            )));
+                        )),
+                  ),
+                  Visibility(
+                    visible: flag,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top:8.0,bottom: 8),
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        child: TextField(
+                          keyboardType: TextInputType.number,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'OTP',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: flag,
+                    child: Padding(
+                      padding: EdgeInsets.only(top:30.0,bottom: 20),
+                      child: Container(
+                          height: 50,
+                          width: 250,
+                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: RaisedButton(
+                            textColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(28.0),
+                            ),
+                            color: Colors.blue,
+                            child: Text('Login'),
+                            onPressed: () {
+                              setState(() {
+                                flag = true;
+                              });
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          MainPage(user: nameController.text)));
+                            },
+                          )),
+                    ),
+                  ),
+                ],
+              )),
+        ));
   }
 }

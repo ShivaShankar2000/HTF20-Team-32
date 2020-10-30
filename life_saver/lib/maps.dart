@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapsPage extends StatefulWidget{
@@ -8,6 +8,11 @@ class MapsPage extends StatefulWidget{
   _MapsState createState() => _MapsState();
 }
 class _MapsState extends State<MapsPage>{
+  static const String _API_KEY = '{{AIzaSyABeN-Itphurpz5wRxaVQPmtp-liJJ5YM4}}';
+  bool searching;
+  List<Marker> markers = <Marker>[];
+  // 1
+
   var lat;
   var lon;
   LatLng _center;
@@ -16,7 +21,6 @@ class _MapsState extends State<MapsPage>{
     _getCurrentLocation();
     super.initState();
   }
-  Position _currentPosition;
   _getCurrentLocation() {
     final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
 
@@ -24,7 +28,6 @@ class _MapsState extends State<MapsPage>{
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
         .then((Position position) {
       setState(() {
-        _currentPosition = position;
         _center = LatLng(position.latitude, position.longitude);
         print("${position.latitude} ${position.longitude}");
       });
