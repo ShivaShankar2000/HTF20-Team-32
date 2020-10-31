@@ -16,8 +16,7 @@ class _MapsState extends State<MapsPage>{
    final homeScaffoldKey = GlobalKey<ScaffoldState>();
    GoogleMapController mapController;
    List<PlacesSearchResult> places = [];
-   List<Marker> allMarkers = [];
-   var _markers;
+   Set<Marker> allMarkers = {};
    bool isLoading = false;
    String errorMessage;
    @override
@@ -64,7 +63,7 @@ class _MapsState extends State<MapsPage>{
            ],
          ),
          body:center==null?Center(child: CircularProgressIndicator()):GoogleMap(
-           markers: _markers,
+           markers: allMarkers,
              onMapCreated: _onMapCreated,
              myLocationEnabled: true, initialCameraPosition: CameraPosition(target:center),
              ));
@@ -111,10 +110,13 @@ class _MapsState extends State<MapsPage>{
        if (result.status == "OK") {
          this.places = result.results;
          result.results.forEach((f) {
-           final markerOptions = Marker(
-               position: LatLng(f.geometry.location.lat, f.geometry.location.lng),
-               infoWindow: InfoWindow(title:"${f.name}"), markerId: MarkerId("12"));
-           _markers.add(markerOptions);
+           print(f.name);
+             final markerOptions = Marker(
+                 position: LatLng(
+                     f.geometry.location.lat, f.geometry.location.lng),
+                 infoWindow: InfoWindow(title: "${f.name}"),
+                 markerId: MarkerId("12"));
+             allMarkers.add(markerOptions);
          });
        } else {
          this.errorMessage = result.errorMessage;
