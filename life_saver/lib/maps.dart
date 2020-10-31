@@ -12,10 +12,9 @@ class MapsPage extends StatefulWidget{
 }
 GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: "AIzaSyABeN-Itphurpz5wRxaVQPmtp-liJJ5YM4" );
 class _MapsState extends State<MapsPage>{
-
+  var center;
    final homeScaffoldKey = GlobalKey<ScaffoldState>();
    GoogleMapController mapController;
-   var target = LatLng(0, 0);
    List<PlacesSearchResult> places = [];
    List<Marker> allMarkers = [];
    var _markers;
@@ -64,15 +63,15 @@ class _MapsState extends State<MapsPage>{
              ),
            ],
          ),
-         body:target==null?Center(child: CircularProgressIndicator()):GoogleMap(
+         body:center==null?Center(child: CircularProgressIndicator()):GoogleMap(
            markers: _markers,
              onMapCreated: _onMapCreated,
-             myLocationEnabled: true, initialCameraPosition: CameraPosition(target:target),
+             myLocationEnabled: true, initialCameraPosition: CameraPosition(target:center),
              ));
    }
 
    void refresh() {
-     final center =  getUserLocation();
+     getUserLocation();
 
      mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
          target:  center, zoom: 15.0)));
@@ -84,22 +83,19 @@ class _MapsState extends State<MapsPage>{
      refresh();
    }
 
-   LatLng getUserLocation()  {
-     var _center;
+   void getUserLocation()  {
      final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+
      geolocator
          .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
          .then((Position position) {
        setState(() {
-          _center = LatLng(position.latitude, position.longitude);
-          target = _center;
+         center = LatLng(position.latitude, position.longitude);
          print("${position.latitude} ${position.longitude}");
        });
      }).catchError((e) {
-
        print(e);
      });
-     return _center;
    }
 
    void getNearbyPlaces(LatLng center) async {
@@ -134,7 +130,7 @@ class _MapsState extends State<MapsPage>{
 
    Future<void> _handlePressButton() async {
      try {
-       final center = await getUserLocation();
+       getUserLocation();
        Prediction p = await PlacesAutocomplete.show(
            context: context,
            strictbounds: center == null ? false : true,
